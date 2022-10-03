@@ -3,15 +3,13 @@ set -x
 # Get an updated config.sub and config.guess
 cp $BUILD_PREFIX/share/gnuconfig/config.* ./build-aux
 
-if [ "$(uname)" == "Darwin" ]; then
-    OPTS=""
+OPTS="--without-x --with-x-toolkit=no --with-xpm=no --with-jpeg=no --with-png=no --with-gif=no --with-tiff=no"
 
+if [ "$(uname)" == "Darwin" ]; then
     # The build has a hard time finding libtinfo, which is separated from
     # libncurses. See
     # https://github.com/conda-forge/emacs-feedstock/pull/16#issuecomment-334241528
     export LDFLAGS="${LDFLAGS} -ltinfo"
-else
-    OPTS="--x-includes=$PREFIX/include --x-libraries=$PREFIX/lib --with-x-toolkit=gtk3 --with-harfbuzz -with-cairo"
 fi
 
 autoreconf -vfi

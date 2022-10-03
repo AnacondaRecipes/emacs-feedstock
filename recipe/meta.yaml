@@ -12,97 +12,38 @@ source:
   sha256: ee21182233ef3232dc97b486af2d86e14042dbb65bbc535df562c3a858232488
   patches:
     - 0002-apple-silicon-resign-binary.patch  # [osx]
-    - 0003-macos-cross-compile-configure.patch  # [osx and build_platform != target_platform]
-    - 0004-macos-cross-compile-makefile.patch  # [osx and build_platform != target_platform]
-    - 0005-macos-cross-compile-nextstep-makefile.patch  # [osx and build_platform != target_platform]
-    - 0006-macos-cross-compile-post-install-pdump-path.patch  # [osx and build_platform != target_platform]
 
 build:
   number: 0
-  skip: true  # [win]
+  skip: true                  # [win]
   detect_binary_files_with_prefix: true
 
 requirements:
   build:
     - pkg-config
-    - gnuconfig  # [unix]
+    - gnuconfig               # [unix]
     - {{ compiler('c') }}
-    - autoconf  # [unix]
-    - automake  # [unix]
-    - m4  # [unix]
-    - make  # [unix]
-    - gtk3  # [build_platform != target_platform]
-    - harfbuzz  # [build_platform != target_platform]
-    - libxml2  # [build_platform != target_platform]
-    - ncurses  # [build_platform != target_platform]
-    - dbus  # [build_platform != target_platform]
-    - jpeg  # [build_platform != target_platform]
-    - libpng  # [build_platform != target_platform]
-    - libtiff  # [build_platform != target_platform]
-    - librsvg  # [build_platform != target_platform]
-    - giflib  # [build_platform != target_platform]
-    - gnutls  # [build_platform != target_platform]
-    - gmp  # [build_platform != target_platform]
-    - glib  # [build_platform != target_platform]
-    - zlib  # [build_platform != target_platform]
+    - autoconf                # [unix]
+    - automake                # [unix]
+    - m4                      # [unix]
+    - make                    # [unix]
   host:
     - libxml2
     - ncurses
-    - dbus  # [osx]
-    - jpeg
-    - libpng
-    - libtiff
-    - librsvg
-    - giflib
+    - dbus                    # [osx]
     - gnutls
     - gmp
     - glib
-    - freetype  # [linux]
-    - cairo  # [linux]
-    - gtk3  # [linux]
-    - harfbuzz  # [linux]
-    - xorg-libxaw  # [linux]
-    - xorg-libxpm  # [linux]
-    - xorg-libxfixes  # [linux]
-    - xorg-libxft  # [linux]
-    - xorg-libxi  # [linux]
-    - xorg-libxrandr  # [linux]
-    - xorg-libxcursor  # [linux]
-    - xorg-libxcomposite  # [linux]
-    - xorg-libxdamage  # [linux]
-    - xorg-libxinerama  # [linux]
-    - xorg-xineramaproto  # [linux]
-    - xorg-libxtst  # [linux]
     - zlib
 
   run:
     - __osx >={{ MACOSX_DEPLOYMENT_TARGET|default("10.9") }}  # [osx and x86_64]
     - libxml2
     - ncurses
-    - dbus  # [osx]
-    - jpeg
-    - libpng
-    - libtiff
-    - giflib
+    - dbus                    # [osx]
     - gnutls
     - gmp
     - glib
-    - freetype  # [linux]
-    - cairo  # [linux]
-    - gtk3  # [linux]
-    - harfbuzz  # [linux]
-    - xorg-libxaw  # [linux]
-    - xorg-libxpm  # [linux]
-    - xorg-libxfixes  # [linux]
-    - xorg-libxft  # [linux]
-    - xorg-libxi  # [linux]
-    - xorg-libxrandr  # [linux]
-    - xorg-libxcursor  # [linux]
-    - xorg-libxcomposite  # [linux]
-    - xorg-libxdamage  # [linux]
-    - xorg-libxinerama  # [linux]
-    - xorg-xineramaproto  # [linux]
-    - xorg-libxtst  # [linux]
     - zlib
 
 test:
